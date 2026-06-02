@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whoosh Promo — Промокоды и Безлимит</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Arial:wght@400;500;600;700&display=swap');
+       
+        :root {
+            --yellow: #ffb928;
+            --dark: #363636;
+        }
+       
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+       
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--dark);
+            color: white;
+            line-height: 1.5;
+        }
+       
+        header {
+            background: rgba(54, 54, 54, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 185, 40, 0.3);
+        }
+       
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+       
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--yellow);
+            text-decoration: none;
+        }
+       
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%),
+                        radial-gradient(circle at 50% 30%, rgba(255, 185, 40, 0.18) 0%, transparent 70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+            position: relative;
+        }
+       
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://picsum.photos/1920/1080?random=scooter') center/cover;
+            opacity: 0.22;
+            z-index: 1;
+        }
+       
+        .hero-content {
+            max-width: 900px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+       
+        .main-title {
+            font-size: 4.8rem;
+            font-weight: 700;
+            color: var(--yellow);
+            margin-bottom: 20px;
+            text-shadow: 0 4px 30px rgba(255, 185, 40, 0.4);
+        }
+       
+        .subtitle {
+            font-size: 1.6rem;
+            color: #ddd;
+            margin-bottom: 60px;
+        }
+
+        .promo-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+       
+        .promo-card {
+            background: #2a2a2a;
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+       
+        .promo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 185, 40, 0.15);
+            border-color: var(--yellow);
+        }
+       
+        .promo-card.bonus {
+            border-color: #4ade80;
+            background: linear-gradient(145deg, #2a2a2a, #1f3a2a);
+        }
+       
+        .promo-card.disabled {
+            opacity: 0.65;
+            filter: grayscale(30%);
+        }
+       
+        .promo-card.disabled::after {
+            content: "НЕТ В НАЛИЧИИ";
+            position: absolute;
+            top: 30px; right: -35px;
+            background: #888; color: white;
+            padding: 8px 50px;
+            font-size: 14px; font-weight: 600;
+            transform: rotate(45deg);
+        }
+       
+        .promo-title { font-size: 1.45rem; font-weight: 600; margin-bottom: 15px; }
+        .promo-price { font-size: 2.2rem; font-weight: 700; color: var(--yellow); margin: 15px 0; }
+        .promo-desc { color: #bbb; margin-bottom: 30px; min-height: 50px; }
+       
+        .btn {
+            display: inline-block;
+            background: var(--yellow);
+            color: #000;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+       
+        .btn:hover { background: #ffe066; transform: scale(1.05); }
+        .btn.bonus { background: #4ade80; }
+        .btn.bonus:hover { background: #22c55e; }
+        .btn.disabled { background: #666; color: #aaa; cursor: not-allowed; }
+
+        /* Отзывы */
+        .reviews-section {
+            background: #242424;
+            padding: 80px 20px;
+        }
+        
+        .rating-banner {
+            background: linear-gradient(90deg, #ff8a00, #ffb928);
+            border-radius: 16px;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            color: black;
+            font-weight: 600;
+        }
+        
+        .rating-big { font-size: 3.5rem; font-weight: 700; }
+        
+        .review-card {
+            background: #2a2a2a;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .avatar {
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            background: #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+        
+        .stars { color: #ffb928; font-size: 1.3rem; }
+        .review-name { font-weight: 600; font-size: 1.1rem; }
+        .review-date { color: #888; font-size: 0.9rem; margin-left: auto; }
+
+        .load-more {
+            display: block;
+            margin: 40px auto 0;
+            background: #ffb928;
+            color: #000;
+            padding: 14px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .load-more:hover {
+            background: #ffe066;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">WHOOSH</a>
+            <div style="color: #ffb928; font-weight: 600;">PROMO</div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="main-title">WHOOSH PROMO</h1>
+            <p class="subtitle">Выгодные промокоды и безлимитные подписки</p>
+            <div style="margin-top: 30px; font-size: 1.1rem; color: #ccc;">
+                Активируйте промокод в приложении Whoosh
+            </div>
+        </div>
+    </section>
+
+    <!-- Promo Cards -->
+    <section style="padding: 60px 0; background: #2a2a2a;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: white;">
+                Выберите выгодное предложение
+            </h2>
+           
+            <div class="promo-container">
+                <div class="promo-card">
+                    <div class="promo-title">Промокод (разовый)</div>
+                    <div class="promo-price">150 ₽</div>
+                    <div class="promo-desc">Скидка на одну поездку (30 минут)</div>
+                    <a href="#" onclick="activatePromo(this)" class="btn">Активировать</a>
+                </div>
+                
+                <div class="promo-card">
+                    <div class="promo-title">Промокод на 4 поездки</div>
+                    <div class="promo-price">400 ₽</div>
+                    <div class="promo-desc">Покрывает полную стоимость 4 поездок</div>
+                    <a href="#" onclick="activatePromo(this)" class="btn">Активировать</a>
+                </div>
+               
+                <div class="promo-card disabled">
+                    <div class="promo-title">Промокод на 2 поездки</div>
+                    <div class="promo-price">220 ₽</div>
+                    <div class="promo-desc">Покрывает полную стоимость 2 поездок</div>
+                    <a href="#" class="btn disabled">Нет в наличии</a>
+                </div>
+               
+                <div class="promo-card">
+                    <div class="promo-title">Безлимит на неделю</div>
+                    <div class="promo-price">700 ₽</div>
+                    <div class="promo-desc">Безлимитные поездки на 7 дней</div>
+                    <a href="#" onclick="activatePromo(this)" class="btn">Активировать</a>
+                </div>
+               
+                <div class="promo-card">
+                    <div class="promo-title">Безлимит на месяц</div>
+                    <div class="promo-price">1200 ₽</div>
+                    <div class="promo-desc">Безлимитные поездки на 30 дней</div>
+                    <a href="#" onclick="activatePromo(this)" class="btn">Активировать</a>
+                </div>
+
+                <div class="promo-card bonus">
+                    <div class="promo-title" style="color: #4ade80;">Пригласи друга</div>
+                    <div class="promo-price" style="color: #4ade80;">БОНУС</div>
+                    <div class="promo-desc">Получи бесплатные минуты за каждого приглашённого друга</div>
+                    <a href="#" onclick="inviteFriend(this)" class="btn bonus">Пригласить друга</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="reviews-section">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center; padding-bottom: 40px;">
+            <h2 style="font-size: 2.8rem; margin-bottom: 15px;">Отзывы</h2>
+            <p style="font-size: 1.3rem; color: #bbb;">937 отзывов от покупателей</p>
+            
+            <div class="rating-banner">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="rating-big">4.9</div>
+                    <div>
+                        <div style="font-size: 1.4rem; font-weight: 700;">Отличный рейтинг</div>
+                        <div>937 покупателей довольны</div>
+                    </div>
+                </div>
+                <div style="font-size: 2.5rem;">🏆</div>
+            </div>
+        </div>
+
+        <div id="reviews-container" style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button id="load-more-btn" class="load-more">Смотреть ещё</button>
+        </div>
+    </section>
+
+    <!-- Как использовать -->
+    <section style="padding: 80px 20px; background: var(--dark); text-align: center;">
+        <div style="max-width: 700px; margin: 0 auto;">
+            <h2 style="font-size: 2rem; margin-bottom: 25px;">Как использовать промокод?</h2>
+            <div style="font-size: 1.2rem; color: #ddd; line-height: 1.7;">
+                1. Активируйте промокод на этой странице<br>
+                2. Откройте приложение Whoosh<br>
+                3. Перейдите в раздел «Промокоды»<br>
+                4. Наслаждайтесь поездками!
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Whoosh Promo. Все права защищены.</p>
+        <p style="margin-top: 10px; font-size: 0.9rem; color: #888;">
+            Официальные промокоды сервиса Whoosh
+        </p>
+    </footer>
+
+    <script>
+        // 85 отзывов
+        const allReviews = [
+            {name: "BlazeKidd", avatar: "🔥", text: "Братва, безлимит на месяц — это просто космос! Катался весь день с пацанами, заряда хватило на всё 🔥", date: "Сегодня"},
+            {name: "LunaRidez", avatar: "🌸", text: "Взяла промокод на 4 поездки для школы. Теперь каждое утро летаю как супергёрл. Маме тоже понравилось 😂", date: "Сегодня"},
+            {name: "SpeedyGamer", avatar: "⚡", text: "Разовый промокод за 150р реально работает. Проехал 25 минут почти бесплатно. Уже взял безлимит на неделю", date: "Вчера"},
+            {name: "WolfByte", avatar: "🐺", text: "Пригласил 3 друзей — получил кучу бесплатных минут. Теперь все вместе гоняем после уроков. Лучший сервис!", date: "Сегодня"},
+            {name: "PixelScooter", avatar: "🎮", text: "Безлимит на месяц просто спас меня. Родители довольны, что не прошу деньги на такси каждый день", date: "2 дня назад"},
+            {name: "SweetVibezz", avatar: "🍭", text: "Очень круто! Каталась с подругами, все в восторге. Промокод на 4 поездки — лучшее вложение", date: "Сегодня"},
+            {name: "NeonRider", avatar: "🚀", text: "Сестра посоветовала, теперь и я в теме. Безлимит на неделю — огонь, катался каждый день после школы", date: "Вчера"},
+            {name: "DiamondDash", avatar: "💎", text: "Пригласил друга — получил бонус. Теперь ездим вдвоём бесплатно. Whoosh топ!", date: "3 дня назад"},
+            {name: "GoalKing17", avatar: "⚽", text: "После футбола удобно до дома добираться. Безлимит на месяц — must have для всех пацанов", date: "Сегодня"},
+            {name: "VibeRider", avatar: "🎵", text: "С музыкой в наушниках и самокатом — идеальное комбо. Промокод сработал моментально", date: "Вчера"},
+            {name: "LionScoot", avatar: "🦁", text: "Первый раз попробовал — теперь каждый день катаюсь. Цены норм, качество огонь", date: "2 дня назад"},
+            {name: "RainbowDash", avatar: "🌈", text: "Девочки, берите безлимит! Очень удобно и весело кататься вместе после уроков", date: "Сегодня"},
+            {name: "TurboNinja", avatar: "🥷", text: "Самый быстрый способ добраться до дома. Безлимит на неделю — лучшее решение этой недели", date: "Сегодня"},
+            {name: "StarScooter", avatar: "⭐", text: "Подарили промокод на день рождения. Теперь чувствую себя королём улиц", date: "4 дня назад"},
+            {name: "GhostRiderX", avatar: "👻", text: "Катался ночью — очень круто. Самокаты быстрые и удобные", date: "Вчера"},
+            {name: "SkyRacer07", avatar: "🦅", text: "Летаю на самокате каждый день после уроков. Безлимит — это спасение!", date: "Сегодня"},
+            {name: "FireBlazer", avatar: "🔥", text: "Пригласил одноклассников — все теперь на Whoosh. Реально выгодно", date: "3 дня назад"},
+            {name: "MoonWalker", avatar: "🌙", text: "Вечерние покатушки с друзьями стали намного круче. Рекомендую!", date: "Вчера"},
+            {name: "FastByte", avatar: "💾", text: "Технарь, но даже я оценил удобство. Промокоды работают идеально", date: "2 дня назад"},
+            {name: "CandyCrush", avatar: "🍬", text: "Милый сервис! Каталась с сестрой, обе в восторге от безлимита", date: "Сегодня"},
+            {name: "StormChaser", avatar: "🌩️", text: "Даже в дождь хочется кататься. Самокаты мощные, приложение удобное", date: "Вчера"},
+            {name: "LegendaryKid", avatar: "👑", text: "Чувствую себя легендарным, когда еду на самокате по району", date: "4 дня назад"},
+            {name: "IceRider", avatar: "❄️", text: "Зимой тоже катаюсь! Безлимит — лучшая инвестиция", date: "Сегодня"},
+            {name: "ShadowDash", avatar: "🌑", text: "Тихо и быстро. Никто не догоняет. Люблю Whoosh", date: "Вчера"},
+            {name: "HyperKid", avatar: "⚡", text: "Мой новый способ передвижения. Родители в шоке, как я быстро везде успеваю", date: "2 дня назад"},
+            {name: "SunshineScoot", avatar: "☀️", text: "Солнечные дни стали ещё лучше благодаря Whoosh!", date: "Сегодня"},
+            {name: "NightWolf", avatar: "🌕", text: "Ночные покатушки — это кайф. Рекомендую всем", date: "Вчера"},
+            {name: "ProGamerX", avatar: "🎮", text: "После тренировок в зале — сразу на самокат. Энергия на максимуме", date: "Сегодня"},
+            {name: "CoolVibes", avatar: "😎", text: "Все друзья уже на Whoosh. Я тоже подключился — не жалею", date: "Вчера"},
+            {name: "ElectricBoy", avatar: "🔋", text: "Электросамокаты — будущее. Я в нём уже живу", date: "2 дня назад"},
+            {name: "DragonRider", avatar: "🐉", text: "Чувствую себя драконом на самокате. Безлимит — это мощь!", date: "Сегодня"},
+            {name: "SparkleGirl", avatar: "✨", text: "С подругами кататься стало в 10 раз веселее. Спасибо Whoosh!", date: "3 дня назад"},
+            {name: "SpeedDemon", avatar: "😈", text: "Я теперь самый быстрый в районе. Безлимит на месяц — огонь!", date: "Вчера"},
+            {name: "HappyScooter", avatar: "😊", text: "Каждый день хорошее настроение, когда еду на самокате", date: "Сегодня"},
+            {name: "UrbanLegend", avatar: "🏙️", text: "Город стал намного интереснее. Whoosh — лучший транспорт", date: "2 дня назад"},
+            {name: "GalaxyKid", avatar: "🌌", text: "Кататься по ночному городу — это как в космосе. Очень красиво", date: "Сегодня"},
+            {name: "BunnyHop", avatar: "🐰", text: "Прыгаю с бордюров и улыбаюсь. Самокат очень послушный", date: "Вчера"},
+            {name: "KingOfStreets", avatar: "👑", text: "Я теперь король улиц. Все пацаны завидуют", date: "3 дня назад"},
+            {name: "DreamRider", avatar: "🌟", text: "Моя мечта сбылась — теперь катаюсь когда хочу", date: "Сегодня"},
+            {name: "FlashDash", avatar: "⚡", text: "Быстрее ветра! Промокоды реально помогают экономить", date: "Вчера"},
+            {name: "MagicScoot", avatar: "🪄", text: "Это как магия — сел и полетел. Обожаю!", date: "2 дня назад"},
+            {name: "VictoryBoy", avatar: "🏆", text: "Каждый день — победа. Спасибо Whoosh за крутые поездки", date: "Сегодня"},
+            {name: "AstroKid", avatar: "🪐", text: "Чувствую себя астронавтом в городе. Самокат — ракета", date: "Вчера"},
+            {name: "MegaVibes", avatar: "🌊", text: "Вайб на максимуме. Кататься с друзьями — лучшее занятие", date: "Сегодня"},
+            {name: "WildRider", avatar: "🌲", text: "Даже в парке круто кататься. Природа + скорость = кайф", date: "3 дня назад"},
+            {name: "HeroScooter", avatar: "🦸", text: "Я теперь супергерой своего района. Безлимит — суперсила", date: "Вчера"},
+            {name: "ZenRider", avatar: "☯️", text: "Катание помогает расслабиться после школы. Очень советую", date: "Сегодня"},
+            {name: "EpicDash", avatar: "🏎️", text: "Эпичные покатушки каждый день. Whoosh — топ!", date: "2 дня назад"},
+            {name: "StarGirl", avatar: "⭐", text: "Я звезда на самокате. Все оборачиваются", date: "Сегодня"},
+            {name: "ThunderBolt", avatar: "🌩️", text: "Как молния! Быстро и мощно. Рекомендую всем", date: "Вчера"},
+            {name: "LuckyKid", avatar: "🍀", text: "Мне повезло с Whoosh. Лучший транспорт в городе", date: "3 дня назад"},
+            {name: "CosmicScoot", avatar: "🌠", text: "Космические ощущения от обычной поездки. Люблю!", date: "Сегодня"},
+            {name: "PowerRider", avatar: "💪", text: "Сила и скорость в одном флаконе. Безлимит — must have", date: "Вчера"},
+            {name: "SmileDash", avatar: "😄", text: "Улыбка не сходит с лица, когда еду на самокате", date: "2 дня назад"},
+            {name: "UltimateKid", avatar: "👾", text: "Это ultimate уровень транспорта. Лучше не бывает", date: "Сегодня"},
+            {name: "CyberScooter", avatar: "🤖", text: "Будущее уже здесь. Самокаты — это круто!", date: "Вчера"},
+            {name: "PartyRider", avatar: "🎉", text: "С друзьями на самокатах — лучшая тусовка!", date: "Сегодня"},
+            {name: "ChillVibes", avatar: "🧘", text: "Кататься спокойно и с кайфом — это про Whoosh", date: "3 дня назад"},
+            {name: "RaceMaster", avatar: "🏁", text: "Я теперь мастер гонок по району. Безлимит рулит!", date: "Вчера"},
+            {name: "JoyfulKid", avatar: "😃", text: "Каждый день радость от поездки. Спасибо!", date: "Сегодня"},
+            {name: "StreetLegend", avatar: "🌃", text: "Легенда улиц. Все знают, что я на Whoosh", date: "2 дня назад"},
+            {name: "BrightStar", avatar: "🌟", text: "Яркая звезда на самокате. Все замечают", date: "Сегодня"},
+            {name: "FreedomRider", avatar: "🕊️", text: "Свобода передвижения на максимуме. Обожаю!", date: "Вчера"},
+            {name: "SuperScooter", avatar: "🦸‍♂️", text: "Суперсамокат для суперприключений!", date: "3 дня назад"},
+            {name: "WaveRider", avatar: "🌊", text: "Как будто плыву по городу. Очень комфортно", date: "Сегодня"},
+            {name: "EnergyBoost", avatar: "⚡", text: "Заряд энергии на весь день после поездки", date: "Вчера"},
+            {name: "CityExplorer", avatar: "🗺️", text: "Исследую город по-новому. Whoosh — лучший помощник", date: "2 дня назад"},
+            {name: "FunMachine", avatar: "🎡", text: "Это не транспорт, это машина для веселья!", date: "Сегодня"}
+        ];
+
+        let displayedCount = 0;
+        const reviewsPerLoad = 6;
+        const container = document.getElementById('reviews-container');
+        const loadMoreBtn = document.getElementById('load-more-btn');
+
+        function createReviewCard(review) {
+            const card = document.createElement('div');
+            card.className = 'review-card';
+            card.innerHTML = `
+                <div class="review-header">
+                    <div class="avatar">${review.avatar}</div>
+                    <div>
+                        <div class="review-name">${review.name}</div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <div class="review-date">${review.date}</div>
+                </div>
+                <p>${review.text}</p>
+            `;
+            return card;
+        }
+
+        function loadMoreReviews() {
+            const remaining = allReviews.length - displayedCount;
+            const toLoad = Math.min(reviewsPerLoad, remaining);
+            
+            for (let i = 0; i < toLoad; i++) {
+                const review = allReviews[displayedCount];
+                container.appendChild(createReviewCard(review));
+                displayedCount++;
+            }
+
+            if (displayedCount >= allReviews.length) {
+                loadMoreBtn.style.display = 'none';
+            }
+        }
+
+        window.onload = () => {
+            for (let i = 0; i < 9; i++) {
+                if (allReviews[i]) {
+                    container.appendChild(createReviewCard(allReviews[i]));
+                    displayedCount++;
+                }
+            }
+            loadMoreBtn.addEventListener('click', loadMoreReviews);
+        };
+
+        function activatePromo(btn) {
+            if (btn.classList.contains('disabled')) return;
+            btn.style.background = '#4ade80';
+            btn.style.color = 'white';
+            btn.innerHTML = '✓ Активировано!';
+            setTimeout(() => {
+                alert('Промокод успешно активирован! Проверьте приложение Whoosh.');
+                btn.style.background = '';
+                btn.style.color = '';
+                btn.innerHTML = 'Активировать';
+            }, 1500);
+        }
+
+        function inviteFriend(btn) {
+            btn.style.background = '#22c55e';
+            btn.innerHTML = '✓ Ссылка скопирована!';
+            setTimeout(() => {
+                alert('Ссылка для приглашения друга скопирована!');
+                btn.style.background = '';
+                btn.innerHTML = 'Пригласить друга';
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
